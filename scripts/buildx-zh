@@ -1,0 +1,20 @@
+#!/bin/bash
+
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+. "$DIR/ci/frontend-build"
+
+cd "${DIR}/../.."
+
+# Buildx Builder
+docker buildx create --name "Buildx-NPM" || echo
+docker buildx use "Buildx-NPM"
+
+if [ "${BUILD_TAG:-0}" != 0 ]; then
+	docker buildx build -f docker/Dockerfile-zh $BUILD_TAG --platform $BUILD_PLATFORM . --push
+else
+	docker buildx build -f docker/Dockerfile-zh -t "chishin/nginx-proxy-manager-zh:dev" --platform linux/amd64,linux/arm64,linux/arm/7 . --push
+fi
+
+docker buildx rm "Buildx-NPM"
+
+echo "Multiarch build Complete"
