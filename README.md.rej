@@ -3,7 +3,7 @@ diff a/README.md b/README.md	(rejected hunks)
 -<p align="center">
 -	<img src="https://nginxproxymanager.com/github.png">
 -	<br><br>
--	<img src="https://img.shields.io/badge/version-2.11.3-green.svg?style=for-the-badge">
+-	<img src="https://img.shields.io/badge/version-2.12.0-green.svg?style=for-the-badge">
 -	<a href="https://hub.docker.com/repository/docker/jc21/nginx-proxy-manager">
 -		<img src="https://img.shields.io/docker/stars/jc21/nginx-proxy-manager.svg?style=for-the-badge">
 -	</a>
@@ -20,13 +20,13 @@ diff a/README.md b/README.md	(rejected hunks)
 -- [Screenshots](https://nginxproxymanager.com/screenshots/)
 -
 -## Project Goal
- 
+
 -I created this project to fill a personal need to provide users with an easy way to accomplish reverse
 -proxying hosts with SSL termination and it had to be so easy that a monkey could do it. This goal hasn't changed.
 -While there might be advanced options they are optional and the project should be as simple as possible
 -so that the barrier for entry here is low.
 +[Original English README](https://github.com/xiaoxinpro/nginx-proxy-manager-zh/blob/develop-zh/README-en.md)
- 
+
 -<a href="https://www.buymeacoffee.com/jc21" target="_blank"><img src="http://public.jc21.com/github/by-me-a-coffee.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
 -
 -
@@ -42,36 +42,36 @@ diff a/README.md b/README.md	(rejected hunks)
 +    <img src="https://nginxproxymanager.com/github.png">
 +    <br>
 +</p>
- 
-+本项目是基于 [NginxProxyManager/nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager) 翻译的中文版本，该项目属于一个预构建的docker映像，它可以让你轻松地部署到你的网站上运行，包括免费的SSL，而不需要知道太多关于 Nginx 或 Let's Encrypt 的信息。  
- 
+
++本项目是基于 [NginxProxyManager/nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager) 翻译的中文版本，该项目属于一个预构建的docker映像，它可以让你轻松地部署到你的网站上运行，包括免费的SSL，而不需要知道太多关于 Nginx 或 Let's Encrypt 的信息。
+
 -## Hosting your home network
 +![](http://image.xiaoxin.pro/2022/05/16/75687b5bfffbe.png)
- 
+
 -I won't go in to too much detail here but here are the basics for someone new to this self-hosted world.
 +## 快速部署
- 
+
 -1. Your home router will have a Port Forwarding section somewhere. Log in and find it
 -2. Add port forwarding for port 80 and 443 to the server hosting this project
 -3. Configure your domain name details to point to your home, either with a static ip or a service like DuckDNS or [Amazon Route53](https://github.com/jc21/route53-ddns)
 -4. Use the Nginx Proxy Manager as your gateway to forward to your other web based services
 +### 1. 环境部署
- 
+
 -## Quick Setup
 +安装Docker和Docker-compose
- 
+
 -1. Install Docker and Docker-Compose
 +- [Docker官方安装文档（英文）](https://docs.docker.com/install/)
 +- [Docker-Compose官方安装文档（英文）](https://docs.docker.com/compose/install/)
 +- **[Docker和Docker-compose安装文档（中文）](https://blog.csdn.net/zhangzejin3883/article/details/124778945)**
- 
+
 -- [Docker Install documentation](https://docs.docker.com/install/)
 -- [Docker-Compose Install documentation](https://docs.docker.com/compose/install/)
 +### 2. 创建YAML文件
- 
+
 -2. Create a docker-compose.yml file similar to this:
 +创建一个 `docker-compose.yml` 文件:
- 
+
  ```yml
 -version: '3.8'
 +version: '3'
