@@ -1,0 +1,8 @@
+#!/bin/bash
+
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+. "$DIR/ci/frontend-build"
+
+cd "${DIR}/../.."
+
+docker build -t chishin/nginx-proxy-manager-zh:2.12.1 -f docker/Dockerfile-zh .
