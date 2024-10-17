@@ -25,7 +25,7 @@ jobs:
       - name: 添加BuildTag环境变量（release）
         if: ${{ github.event_name == 'release'}}
         run: |
-          echo "BUILD_TAG=-t ${BUILD_IMAGE}:${BUILD_VERSION} -t ${BUILD_IMAGE}:${BUILD_VERSION%.*} -t ${BUILD_IMAGE}:${BUILD_VERSION%.*.*} -t ${BUILD_IMAGE}:release" >> $GITHUB_ENV
+          echo "BUILD_TAG=-t ${BUILD_IMAGE}:${BUILD_VERSION} -t ${BUILD_IMAGE}:${BUILD_VERSION%.*} -t ${BUILD_IMAGE}:${BUILD_VERSION%.*.*} -t ${BUILD_IMAGE}:release -t ${BUILD_IMAGE}:latest" >> $GITHUB_ENV
       - name: 登录DockerHub账号
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
