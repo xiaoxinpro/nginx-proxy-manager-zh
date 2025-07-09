@@ -1,0 +1,45 @@
+name: GitHub Actions Docker Buildx
+on:
+ workflow_dispatch:
+ push:
+  branches:
+   - 'develop-zh'
+   - 'zh-v[1-9].[0-9]+.[0-9]+'
+ release:
+   types: [published]
+jobs:
+  Docker-Buildx:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: 添加Build环境变量
+        run: |
+          echo "BUILD_IMAGE=chishin/nginx-proxy-manager-zh" >> $GITHUB_ENV
+          echo "BUILD_PLATFORM=linux/amd64,linux/arm64,linux/arm/7" >> $GITHUB_ENV
+          echo "BUILD_VERSION=$(cat .version)" >> $GITHUB_ENV
+      - name: 添加BuildTag环境变量（push）
+        if: ${{ github.event_name == 'push'}}
+        run: |
+          echo "BUILD_TAG=-t ${BUILD_IMAGE}:dev-${BUILD_VERSION} -t ${BUILD_IMAGE}:dev" >> $GITHUB_ENV
+      - name: 添加BuildTag环境变量（release）
+        if: ${{ github.event_name == 'release'}}
+        run: |
+          echo "BUILD_TAG=-t ${BUILD_IMAGE}:${BUILD_VERSION} -t ${BUILD_IMAGE}:${BUILD_VERSION%.*} -t ${BUILD_IMAGE}:${BUILD_VERSION%.*.*} -t ${BUILD_IMAGE}:release -t ${BUILD_IMAGE}:latest" >> $GITHUB_ENV
+      - name: 登录DockerHub账号
+        env:
+          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        run: echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
+      - name: Docker Setup Buildx
+        uses: docker/setup-buildx-action@v2.5.0
+      - name: 输出Buildx环境变量
+        run: |
+          echo "BUILD_TAG=$BUILD_TAG"
+          echo "BUILD_IMAGE=$BUILD_IMAGE"
+          echo "BUILD_PLATFORM=$BUILD_PLATFORM"
+          echo "BUILD_VERSION=$BUILD_VERSION"
+      - name: Buildx Dockerfile
+        run: |
+          chmod -R 755 scripts
+          ./scripts/buildx-zh
