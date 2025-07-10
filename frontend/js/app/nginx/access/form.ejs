@@ -47,10 +47,11 @@
                 <!-- Authorization -->
                 <div class="tab-pane" id="auth">
                     <p>
-                        Basic Authorization via
+                        授权用户基于
                         <a target="_blank" href="https://nginx.org/en/docs/http/ngx_http_auth_basic_module.html">
                             Nginx HTTP Basic Authentication
                         </a>
+                        实现
                     </p>
                     <div class="row">
                         <div class="col-sm-6 col-md-6">
@@ -74,10 +75,11 @@
                 <!-- Access -->
                 <div class="tab-pane" id="access">
                     <p>
-                        IP Address Whitelist/Blacklist via
+                        IP地址黑白名单基于
                         <a target="_blank" href="https://nginx.org/en/docs/http/ngx_http_access_module.html">
                             Nginx HTTP Access
                         </a>
+                        实现
                     </p>
                     <div class="clients"><!-- clients --></div>
                     <div class="row">
@@ -92,7 +94,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-muted">Note that the <code>allow</code> and <code>deny</code> directives will be applied in the order they are defined.</div>
+                    <div class="text-muted">注意： <code>allow(允许)</code> 和 <code>deny(禁止)</code> 规则将按照它们定义的顺序执行。</div>
                     <div class="btn-list justify-content-end">
                         <button type="button" class="btn btn-teal access_add"><%- i18n('access-lists', 'access-add') %></button>
                     </div>
